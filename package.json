@@ -7,10 +7,11 @@
   "license": "MIT",
   "scripts": {
     "tsc": "tsc",
-    "dev": "next",
+    "dev": "next -p 3001",
     "build:dev": "next build",
     "build": "npm run tsc && NODE_ENV=production next build",
     "analyze": "npm run tsc && NODE_ENV=production ANALYZE=true next build",
+    "export": "next export",
     "start": "next start",
     "test": "jest"
   },

@@ -12,7 +12,7 @@ export const SITE_TITLE = '봉소랩스 IMS'
 export const SITE_DESCRIPTION = '크롤링 데이터 관리'
 export const SITE_IMAGE = 'https://avatars2.githubusercontent.com/u/31210784?v=4&s=200'
 
-const GITHUB_CLIENT_ID = '8f5ba49d3b3afe84065b'
+const GITHUB_CLIENT_ID = '8dc6e18c7457e3b6e5e4'
 const LOGIN_REQUEST_URI = 'http://github.com/login/oauth/authorize'
 
 export const LOGIN_REQUEST_URL = [
