@@ -1,5 +1,6 @@
-const exportPathMap = require('nextjs-export-path-map')
+const {exportPathMap} = require('nextjs-export-path-map')
 const trash = require('trash')
+const path = require('path')
 
 module.exports = {
   webpack(config) {
@@ -33,5 +34,5 @@ module.exports = {
     })
     return config
   },
-  exportPathMap
+  exportPathMap: exportPathMap.bind(null, path.join(__dirname, 'pages'))
 }
