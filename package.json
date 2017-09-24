@@ -1,8 +1,8 @@
 {
-  "name": "nextjs-typescript-boilerplate",
+  "name": "bongso-ims",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "https://github.com/deptno/nextjs-typescript-boilerplate",
+  "repository": "https://github.com/bongso/ims",
   "author": "bglee <deptno@gmail.com>",
   "license": "MIT",
   "scripts": {

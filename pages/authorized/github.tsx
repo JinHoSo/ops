@@ -2,6 +2,7 @@ import * as React from 'react'
 import {Provider, Store} from 'react-redux'
 import {StaticPage} from '../_page'
 import {Layout} from '../../src/components/Layout'
+import {isomorphicQuery} from 'nextjs-isomorphic-query'
 
 export default class Index extends StaticPage<{}> {
   render() {
