@@ -1,13 +1,16 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
+import stylesheet from './Header.pcss'
+import {Style} from './Style'
 
-export class Header extends React.Component<undefined, undefined> {
+export class Header extends React.Component<{}, {}> {
   render() {
     return (
-      <header className={classnames('row')}>
-        <div className="col-12">
-          Infrastructure Management System
-        </div>
+      <header className={classnames('row', 'align-items-center')}>
+        <Style style={stylesheet}></Style>
+        <p className="col-12">
+          봉소랩스 IMS
+        </p>
       </header>
     )
   }

@@ -1,9 +1,15 @@
 import * as React from 'react'
-import * as classnames from 'classnames'
+import stylesheet from './Footer.pcss'
+import {Style} from './Style'
 
 export const Footer = props =>
-  <footer className={classnames('row', 'footer')}>
+  <footer className="row">
+    <Style style={stylesheet} />
     <div className="col-12">
-      <a href="https://github.com/bongso">봉소랩스</a>
+      © 2017 봉소랩스 Inc. All rights reserved.
+      &nbsp;
+      <a href="https://github.com/bongso">
+        <img src="/static/img/github-xs.png" alt="bongso github"/>
+      </a>
     </div>
   </footer>

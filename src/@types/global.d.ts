@@ -13,6 +13,6 @@ declare module '*.svg' {
 }
 
 declare module '*.pcss' {
-  const resource: string
+  const resource: any
   export default resource
 }
