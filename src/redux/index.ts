@@ -1,6 +1,6 @@
 import {bindActionCreators, combineReducers} from 'redux'
 import {PersistState, reducer as persist, saveUserInfo} from './persist/index'
-import {loggedIn, reducer as system, SystemState} from './system/index'
+import {loggedIn, logout, reducer as system, SystemState} from './system/index'
 import {reducer as router} from './router/index'
 
 export const reducer = combineReducers<RootState>({
@@ -9,7 +9,8 @@ export const reducer = combineReducers<RootState>({
   router,
 })
 const actionCreators: ActionCreators = {
-  loggedIn
+  loggedIn,
+  logout,
 }
 export const actions: (dispatch) => ActionCreators = bindActionCreators.bind(null, actionCreators)
 export interface RootState {
@@ -19,4 +20,5 @@ export interface RootState {
 
 export interface ActionCreators {
   loggedIn: typeof loggedIn
+  logout: typeof logout
 }

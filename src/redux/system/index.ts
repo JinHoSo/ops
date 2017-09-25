@@ -1,7 +1,7 @@
 import {REHYDRATE} from 'redux-persist/constants'
 import {createActions, FAIL, REQUEST, SUCCESS} from '../common'
 import {initializeGa} from '../log/index'
-import {saveUserInfo} from '../persist/index'
+import {removeUserInfo, saveUserInfo} from '../persist/index'
 import {Reducer} from 'redux'
 import {back, changeUrl} from '../router/index'
 import {ROUTES} from '../../constants/routes'
@@ -29,7 +29,8 @@ export const reducer: Reducer<SystemState> = (state = defaultState, action) => {
 enum ActionTypes {
   BOOT      = 'boot',
   SESSION   = 'session',
-  LOGGED_IN = 'logged in'
+  LOGGED_IN = 'logged in',
+  LOGOUT    = 'logout',
 }
 
 export function boot() {
@@ -48,6 +49,14 @@ export function loggedIn(userInfo, bySession?: boolean) {
     if (!bySession) {
       dispatch(changeUrl(ROUTES.HOME, {}, true))
     }
+  }
+}
+export function logout() {
+  return async dispatch => {
+    dispatch(removeUserInfo())
+    dispatch({
+      type: ActionTypes.LOGOUT
+    })
   }
 }
 
