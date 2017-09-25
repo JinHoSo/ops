@@ -45,10 +45,7 @@ export function loggedIn(userInfo, bySession?: boolean) {
       type:    ActionTypes.LOGGED_IN,
       payload: userInfo
     })
-    //todo: if login page === independent
-    if (!bySession) {
-      dispatch(changeUrl(ROUTES.HOME, {}, true))
-    }
+    dispatch(changeUrl(ROUTES.NEWS, {}, true))
   }
 }
 export function logout() {
@@ -57,6 +54,7 @@ export function logout() {
     dispatch({
       type: ActionTypes.LOGOUT
     })
+    dispatch(changeUrl(ROUTES.HOME, {}, true))
   }
 }
 
