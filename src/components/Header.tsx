@@ -31,7 +31,9 @@ export const Header = connect<S, ActionCreators, O>(
           <Style style={stylesheet}></Style>
           <div className="col-8">
             <Link href={ROUTES.HOME}>
-              <a>봉소랩스 IMS</a>
+              <a>
+                <img src="https://avatars2.githubusercontent.com/u/31210784?v=4&s=200" width={32} height={32}/>
+              </a>
             </Link>
           </div>
           {me && <UserBanner className="col-4" user={me}/>}
