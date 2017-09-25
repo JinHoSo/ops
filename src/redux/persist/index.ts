@@ -10,9 +10,9 @@ export const reducer: Reducer<PersistState> = (state = defaultState, action) => 
         userInfo: payload
       }
     case ActionTypes.REMOVE_USER_INFO:
+      delete state.userInfo
       return {
         ...state,
-        userInfo: null
       }
     default:
       return state

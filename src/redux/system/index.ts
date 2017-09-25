@@ -45,7 +45,7 @@ export function loggedIn(userInfo, bySession?: boolean) {
       type:    ActionTypes.LOGGED_IN,
       payload: userInfo
     })
-    dispatch(changeUrl(ROUTES.NEWS, {}, true))
+    dispatch(changeUrl(ROUTES.NEWS))
   }
 }
 export function logout() {
@@ -54,7 +54,7 @@ export function logout() {
     dispatch({
       type: ActionTypes.LOGOUT
     })
-    dispatch(changeUrl(ROUTES.HOME, {}, true))
+    dispatch(changeUrl(ROUTES.HOME))
   }
 }
 
@@ -65,6 +65,9 @@ export function session() {
     dispatch({type: SESSION[REQUEST]})
     try {
       const userInfo = getState().persist.userInfo
+      if (!userInfo) {
+        throw new Error('cannot found login information')
+      }
       dispatch({type: SESSION[SUCCESS]})
       dispatch(initializeGa(userInfo.id))
       dispatch(loggedIn(userInfo, true))
