@@ -19,7 +19,7 @@ export const Nav: SFC<Nav> = props => {
     <nav className={classnames(className, 'navbar', 'navbar-dark', 'bg-dark', 'align-items-center')}>
       <Style style={stylesheet}></Style>
       {navs.map(nav => (
-        <span>
+        <span key={nav.name}>
           <Link href={nav.url}>
             <a>{nav.name}</a>
           </Link>
