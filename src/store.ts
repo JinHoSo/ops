@@ -39,10 +39,10 @@ export const getStore = (state, isServer?): Store<RootState> => {
         composeEnhancers(applyMiddleware(...mw), autoRehydrate())
       )
       store.dispatch(initializeNa());
-      store.dispatch(session());
 
       const whitelist = ['persist']
       persistStore(store, {whitelist}, _ => {
+        store.dispatch(session());
         console.log(`define whitelist: ${whitelist.join(', ')}`)
       })
     }

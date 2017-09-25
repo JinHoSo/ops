@@ -18,7 +18,7 @@ enum ActionTypes {
   SAVE_USER_INFO = 'save user information'
 }
 
-export function saveUserInfo(userInfo) {
+export function saveUserInfo(userInfo: User) {
   return {
     type:    ActionTypes.SAVE_USER_INFO,
     payload: userInfo
@@ -26,5 +26,15 @@ export function saveUserInfo(userInfo) {
 }
 
 export interface PersistState {
-  userInfo: any
+  userInfo: User
+}
+export interface User {
+  tokens: Tokens
+  name: string
+  email: string
+  avatarUrl: string
+  teams: string[]
+}
+interface Tokens {
+  github: string
 }

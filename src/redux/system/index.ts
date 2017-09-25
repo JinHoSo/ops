@@ -3,6 +3,8 @@ import {createActions, FAIL, REQUEST, SUCCESS} from '../common'
 import {initializeGa} from '../log/index'
 import {saveUserInfo} from '../persist/index'
 import {Reducer} from 'redux'
+import {back, changeUrl} from '../router/index'
+import {ROUTES} from '../../constants/routes'
 
 const defaultState = {} as SystemState
 
@@ -25,13 +27,27 @@ export const reducer: Reducer<SystemState> = (state = defaultState, action) => {
 }
 
 enum ActionTypes {
-  BOOT    = 'boot',
-  SESSION = 'session',
+  BOOT      = 'boot',
+  SESSION   = 'session',
+  LOGGED_IN = 'logged in'
 }
 
 export function boot() {
   return {
     type: ActionTypes.BOOT
+  }
+}
+export function loggedIn(userInfo, bySession?: boolean) {
+  return async dispatch => {
+    dispatch(saveUserInfo(userInfo))
+    dispatch({
+      type:    ActionTypes.LOGGED_IN,
+      payload: userInfo
+    })
+    //todo: if login page === independent
+    if (!bySession) {
+      dispatch(changeUrl(ROUTES.HOME, {}, true))
+    }
   }
 }
 
@@ -41,12 +57,10 @@ export function session() {
   return async (dispatch, getState) => {
     dispatch({type: SESSION[REQUEST]})
     try {
-      const userInfo: any = await (async _ => {
-        throw new Error('write session manging code')
-      })()
+      const userInfo = getState().persist.userInfo
       dispatch({type: SESSION[SUCCESS]})
-      dispatch(saveUserInfo(userInfo))
       dispatch(initializeGa(userInfo.id))
+      dispatch(loggedIn(userInfo, true))
     } catch (ex) {
       dispatch({type: SESSION[FAIL]})
       dispatch(initializeGa())

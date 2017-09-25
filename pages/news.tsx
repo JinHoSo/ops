@@ -1,15 +1,15 @@
 import * as React from 'react'
-import {Provider, Store} from 'react-redux'
-import {Home} from '../src/components/Home'
+import {Provider} from 'react-redux'
 import {Layout} from '../src/components/Layout'
 import {StaticPage} from './_page'
+import {UnderConstruction} from '../src/components/UnderConstruction'
 
 export default class extends StaticPage<{}> {
   render() {
     return (
       <Provider store={this.store}>
         <Layout>
-          <Home/>
+          <UnderConstruction />
         </Layout>
       </Provider>
     )
