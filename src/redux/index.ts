@@ -1,5 +1,5 @@
 import {bindActionCreators, combineReducers} from 'redux'
-import {PersistState, reducer as persist, saveUserInfo} from './persist/index'
+import {PersistState, reducer as persist} from './persist/index'
 import {loggedIn, logout, reducer as system, SystemState} from './system/index'
 import {reducer as router} from './router/index'
 import {getNews, reducer as news, NewsState} from './news/index'

@@ -23,12 +23,12 @@ enum ActionTypes {
   SESSION   = 'session',
   LOGGED_IN = 'logged in',
   LOGOUT    = 'logout',
-  NEWS   = 'news',
+  NEWS      = 'news',
 }
 
 const ACTIONS_NEWS = createActions(ActionTypes.NEWS)
 export function getNews() {
-  return GET(API_NEWS, ACTIONS_NEWS)
+  return GET(API_NEWS, ACTIONS_NEWS, {headers: {Authorization: ''}})
 }
 export interface NewsState {
   list: News[]
