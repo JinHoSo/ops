@@ -1,3 +1,5 @@
+import {RootState} from './index'
+
 export function createActions(actionType: string): [string, string, string] {
   return [`request ${actionType}`, `success ${actionType}`, `fail ${actionType}`]
 }
@@ -9,3 +11,10 @@ export const FAIL: FAIL       = 2
 export type REQUEST = 0
 export type SUCCESS = 1
 export type FAIL = 2
+
+export const headers = getState => {
+  const state: RootState = getState()
+  const {jwt: Authorization = ''} = state.persist.userInfo||{}
+
+  return {Authorization}
+}

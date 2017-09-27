@@ -40,6 +40,7 @@ export interface PersistState {
   userInfo: User
 }
 export interface User {
+  jwt: string
   tokens: Tokens
   name: string
   email: string

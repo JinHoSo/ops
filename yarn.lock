@@ -5352,8 +5352,8 @@ reduce-function-call@^1.0.1, reduce-function-call@^1.0.2:
     balanced-match "^0.4.2"
 
 "redux-fetch@https://github.com/deptno/redux-fetch.git#refac/v2":
-  version "0.0.4"
-  resolved "https://github.com/deptno/redux-fetch.git#4226fd4185751915633a8689145b9f5ba39b589f"
+  version "0.0.5"
+  resolved "https://github.com/deptno/redux-fetch.git#b99e55f7f44c84349a25d383d8aeed01e9cf84c7"
   dependencies:
     isomorphic-fetch "^2.2.1"
 

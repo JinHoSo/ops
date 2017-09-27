@@ -1,7 +1,8 @@
 import {Reducer} from 'redux'
 import {GET} from 'redux-fetch'
 import {API_NEWS} from '../../constants/env'
-import {createActions, SUCCESS} from '../common'
+import {createActions, headers, SUCCESS} from '../common'
+import {RootState} from '../index'
 
 const defaultState = {} as NewsState
 
@@ -27,9 +28,8 @@ enum ActionTypes {
 }
 
 const ACTIONS_NEWS = createActions(ActionTypes.NEWS)
-export function getNews() {
-  return GET(API_NEWS, ACTIONS_NEWS, {headers: {Authorization: ''}})
-}
+export const getNews = GET(API_NEWS, ACTIONS_NEWS, {headers})
+
 export interface NewsState {
   list: News[]
 }
