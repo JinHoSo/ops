@@ -37,7 +37,7 @@ export const UserBanner = connect<S, DispatchProps, O>(
       const {clicked} = this.state
       return (
         <div className={classnames(className, 'user-banner', 'text-right')} onClick={this.handleClick}>
-          <Style style={stylesheet}></Style>
+          <Style>{stylesheet}</Style>
           {clicked && (
             <span className="logout" onClick={this.props.actions.logout}>로그아웃</span>
           )}

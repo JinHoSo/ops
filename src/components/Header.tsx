@@ -28,7 +28,7 @@ export const Header = connect<S, DispatchProps, O>(
       const {me} = this.props
       return (
         <header className={classnames('row', 'align-items-center')}>
-          <Style style={stylesheet}></Style>
+          <Style>{stylesheet}</Style>
           <div className="col-6">
             <Link href={ROUTES.HOME}>
               <a>

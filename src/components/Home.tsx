@@ -6,7 +6,7 @@ import {Style} from './Style'
 
 export const Home = props =>
   <div className={classnames('home', 'jumbotron')}>
-    <Style style={stylesheet}/>
+    <Style>{stylesheet}</Style>
     <a className={classnames('row', 'align-items-center')} href={LOGIN_REQUEST_URL}>
       <div className="col-2">
         <img src="/static/img/github.png" alt="login with github"/>

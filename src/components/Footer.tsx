@@ -4,7 +4,7 @@ import {Style} from './Style'
 
 export const Footer = props =>
   <footer className="row">
-    <Style style={stylesheet} />
+    <Style>{stylesheet}</Style>
     <div className="col-12">
       © 2017 봉소랩스 Inc. All rights reserved.
       &nbsp;

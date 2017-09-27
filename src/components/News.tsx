@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import {actions, DispatchProps, RootState} from '../redux/index'
 import {NewsState} from '../redux/news/index'
 import {BootstrapTable as Table, TableHeaderColumn as Th} from 'react-bootstrap-table'
+import {SystemState} from '../redux/system/index'
 
-interface S extends NewsState {
+interface S extends NewsState, SystemState {
 }
 
 interface O {
@@ -12,7 +13,10 @@ interface O {
 
 type Props = S & DispatchProps & O
 export const News = connect<S, DispatchProps, O>(
-  (state: RootState) => state.news,
+  (state: RootState) => ({
+      ...state.news,
+      ...state.system
+    }),
   actions
 )(
   class News extends React.Component<Props, {}> {
@@ -40,7 +44,15 @@ export const News = connect<S, DispatchProps, O>(
     }
 
     componentDidMount() {
-      this.props.actions.getNews()
+      if (this.props.boot) {
+        this.props.actions.getNews()
+      }
+    }
+
+    componentWillReceiveProps(props) {
+      if (!this.props.boot && props.boot) {
+        this.props.actions.getNews()
+      }
     }
 
     private formatId(cell, row) {

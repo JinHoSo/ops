@@ -12,7 +12,7 @@ export const UnderConstruction: SFC<UnderConstruction> = props => {
 
   return (
     <div className={classnames(className, 'jumbotron', 'align-items-center', 'text-center')}>
-      <Style style={stylesheet}></Style>
+      <Style>{stylesheet}</Style>
       미구현
     </div>
   )
