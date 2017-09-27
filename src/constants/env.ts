@@ -23,5 +23,5 @@ export const LOGIN_REQUEST_URL = [
     scope
   })
 ].join('?')
-const API_URL = 'https://4742efjkn6.execute-api.ap-northeast-2.amazonaws.com/dev'
+const API_URL = 'https://6w5av02ruc.execute-api.ap-northeast-2.amazonaws.com/dev'
 export const API_NEWS = `${API_URL}/news`

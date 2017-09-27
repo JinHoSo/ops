@@ -28,7 +28,7 @@ enum ActionTypes {
 }
 
 const ACTIONS_NEWS = createActions(ActionTypes.NEWS)
-export const getNews = GET(API_NEWS, ACTIONS_NEWS, {headers})
+export const getNews = () => GET(API_NEWS, ACTIONS_NEWS, {headers})
 
 export interface NewsState {
   list: News[]
