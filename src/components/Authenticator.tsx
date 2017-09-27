@@ -30,7 +30,14 @@ export const Authenticator = connect<S, DispatchProps, O>(
         return this.setState({deny: true})
       }
       const [_, claim = ''] = jwt.split('.')
-      const userInfo        = JSON.parse(atob(claim))
+
+      const userInfo        = JSON.parse(
+        atob(
+          claim
+            .replace('-', '+')
+            .replace('_', '/')
+        )
+      )
       this.props.actions.loggedIn({...userInfo, jwt})
     }
   }

@@ -13,15 +13,24 @@ export const SITE_DESCRIPTION = '크롤링 데이터 관리'
 export const SITE_IMAGE = 'https://avatars2.githubusercontent.com/u/31210784?v=4&s=200'
 
 const GITHUB_CLIENT_ID = '8dc6e18c7457e3b6e5e4'
-const LOGIN_REQUEST_URI = 'https://github.com/login/oauth/authorize'
-const API_URL = 'https://6w5av02ruc.execute-api.ap-northeast-2.amazonaws.com/dev'
-const scope = ['read:org'].join('')
+const LOGIN_GITHUB_REQUEST_URI = 'https://github.com/login/oauth/authorize'
 
-export const LOGIN_REQUEST_URL = [
-  LOGIN_REQUEST_URI,
+const SLACK_CLIENT_ID = '16709086454.247870125634'
+const LOGIN_SLACK_REQUEST_URI = 'https://slack.com/oauth/authorize'
+
+const API_URL = 'https://6w5av02ruc.execute-api.ap-northeast-2.amazonaws.com/dev'
+export const LOGIN_GITHUB_REQUEST_URL = [
+  LOGIN_GITHUB_REQUEST_URI,
   qs.stringify({
     client_id: GITHUB_CLIENT_ID,
-    scope
+    scope: ['read:org'].join(',')
+  })
+].join('?')
+export const LOGIN_SLACK_REQUEST_URL = [
+  LOGIN_SLACK_REQUEST_URI,
+  qs.stringify({
+    client_id: SLACK_CLIENT_ID,
+    scope: ['team:read', 'usergroups:read', 'pins:read', 'stars:read', 'users:read'].join(',')
   })
 ].join('?')
 export const API_NEWS = `${API_URL}/news`
