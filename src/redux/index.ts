@@ -1,7 +1,7 @@
 import {bindActionCreators, combineReducers} from 'redux'
 import {PersistState, reducer as persist} from './persist/index'
 import {loggedIn, logout, reducer as system, SystemState} from './system/index'
-import {reducer as router} from './router/index'
+import {changeUrl, reducer as router, replaceUrl} from './router/index'
 import {getNews, reducer as news, NewsState} from './news/index'
 
 export const reducer = combineReducers<RootState>({
@@ -10,20 +10,29 @@ export const reducer = combineReducers<RootState>({
   router,
   news
 })
-const actionCreators: ActionCreators = {
-  loggedIn,
-  logout,
-  getNews,
-}
-export const actions: (dispatch) => ActionCreators = bindActionCreators.bind(null, actionCreators)
 export interface RootState {
   persist: PersistState
   system: SystemState
   news: NewsState
 }
 
-export interface ActionCreators {
+export function actions(dispatch): DispatchProps {
+  const actionCreators = {
+    loggedIn,
+    logout,
+    getNews,
+    replaceUrl
+  }
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  }
+}
+interface ActionCreators {
   loggedIn: typeof loggedIn
   logout: typeof logout
   getNews: typeof getNews
+  replaceUrl: typeof replaceUrl
+}
+export interface DispatchProps {
+  actions: ActionCreators
 }

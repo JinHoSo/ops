@@ -1,18 +1,18 @@
 import * as React from 'react'
-import {connect} from 'react-redux'
-import {actions, ActionCreators, RootState} from '../redux/index'
 import {SFC} from 'react'
+import {connect} from 'react-redux'
+import {actions, DispatchProps} from '../redux/index'
 
 interface S {
 }
 interface O {
   jwt: string
 }
-type Props = S & ActionCreators & O
+type Props = S & DispatchProps & O
 interface State {
   deny: boolean
 }
-export const Authenticator = connect<S, ActionCreators, O>(
+export const Authenticator = connect<S, DispatchProps, O>(
   null,
   actions
 )(
@@ -31,7 +31,7 @@ export const Authenticator = connect<S, ActionCreators, O>(
       }
       const [_, claim = ''] = jwt.split('.')
       const userInfo        = JSON.parse(atob(claim))
-      this.props.loggedIn({...userInfo, jwt})
+      this.props.actions.loggedIn({...userInfo, jwt})
     }
   }
 )

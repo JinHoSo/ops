@@ -16,6 +16,11 @@ export const reducer: Reducer<SystemState> = (state = defaultState, action) => {
         ...state,
         boot: true
       }
+    case ActionTypes.LOGGED_IN:
+      return {
+        ...state,
+        loggedIn: true
+      }
     case REHYDRATE:
       return {
         ...state,
@@ -83,5 +88,6 @@ export function session() {
 export interface SystemState {
   boot: boolean
   reHydrated: boolean
+  loggedIn: boolean
 }
 

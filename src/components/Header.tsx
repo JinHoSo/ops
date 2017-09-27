@@ -5,7 +5,7 @@ import {Style} from './Style'
 import Link from 'next/link'
 import {ROUTES} from '../constants/routes'
 import {connect} from 'react-redux'
-import {ActionCreators, actions, RootState} from '../redux/index'
+import {actions, DispatchProps, RootState} from '../redux/index'
 import {User} from '../redux/persist/index'
 import {Nav} from './Nav'
 import {UserBanner} from './UserBanner'
@@ -14,8 +14,8 @@ interface S {
   me: User
 }
 interface O {}
-type Props =  S & ActionCreators & O
-export const Header = connect<S, ActionCreators, O>(
+type Props =  S & DispatchProps & O
+export const Header = connect<S, DispatchProps, O>(
   (state: RootState) => {
     return {
       me: state.persist.userInfo

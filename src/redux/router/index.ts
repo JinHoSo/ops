@@ -18,7 +18,7 @@ enum ActionTypes {
 }
 
 export const changeUrl  = updateUrl
-export const replaceUrl = (url = Router.pathname, options = {}, replace = false) =>
+export const replaceUrl = (url = Router.pathname, options = {}, replace = true) =>
   updateUrl(url, options, replace, REPLACE)
 
 export function back() {

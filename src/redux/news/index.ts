@@ -1,7 +1,7 @@
 import {Reducer} from 'redux'
 import {GET} from 'redux-fetch'
 import {API_NEWS} from '../../constants/env'
-import {createActions, headers, SUCCESS} from '../common'
+import {createActions, FAIL, headers, REQUEST, SUCCESS} from '../common'
 import {RootState} from '../index'
 
 const defaultState = {} as NewsState
@@ -9,10 +9,22 @@ const defaultState = {} as NewsState
 export const reducer: Reducer<NewsState> = (state = defaultState, action) => {
   const {type, payload} = action
   switch (type) {
+    case ACTIONS_NEWS[REQUEST]:
+    return {
+      ...state,
+      loading: true
+    }
     case ACTIONS_NEWS[SUCCESS]:
       return {
         ...state,
-        list: payload
+        list: payload,
+        loading: false
+      }
+    case ACTIONS_NEWS[FAIL]:
+      return {
+        ...state,
+        list: [],
+        loading: false
       }
     default:
       return state
@@ -32,6 +44,7 @@ export const getNews = () => GET(API_NEWS, ACTIONS_NEWS, {headers})
 
 export interface NewsState {
   list: News[]
+  loading: boolean
 }
 
 interface News {

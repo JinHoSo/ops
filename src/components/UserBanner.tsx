@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as classnames from 'classnames'
 import {User} from '../redux/persist/index'
 import {connect} from 'react-redux'
-import {ActionCreators, actions, RootState} from '../redux/index'
+import {DispatchProps, actions, RootState} from '../redux/index'
 import {Style} from './Style'
 import stylesheet from './UserBanner.pcss'
 
@@ -12,11 +12,11 @@ interface S {
 interface O {
   className?: string
 }
-type Props = S & ActionCreators & O
+type Props = S & DispatchProps & O
 interface State {
   clicked: boolean
 }
-export const UserBanner = connect<S, ActionCreators, O>(
+export const UserBanner = connect<S, DispatchProps, O>(
   (state: RootState) => {
     return {
       user: state.persist.userInfo
@@ -39,7 +39,7 @@ export const UserBanner = connect<S, ActionCreators, O>(
         <div className={classnames(className, 'user-banner', 'text-right')} onClick={this.handleClick}>
           <Style style={stylesheet}></Style>
           {clicked && (
-            <span className="logout" onClick={this.props.logout}>로그아웃</span>
+            <span className="logout" onClick={this.props.actions.logout}>로그아웃</span>
           )}
           <img src={user.avatarUrl} role="presentation" width={32} height={32} />
           <span>{user.name}({user.email})</span>
