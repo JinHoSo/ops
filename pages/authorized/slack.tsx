@@ -7,12 +7,11 @@ import {Authenticator} from '../../src/components/Authenticator'
 
 export default class Index extends StaticPage<{}> {
   render() {
-    console.log(isomorphicQuery(this.props.url.query))
-    const {code} = isomorphicQuery(this.props.url.query)
+    const {jwt} = isomorphicQuery(this.props.url.query)
     return (
       <Provider store={this.store}>
         <Layout>
-          {code && <Authenticator jwt={code} />}
+          {jwt && <Authenticator jwt={jwt} />}
         </Layout>
       </Provider>
     )

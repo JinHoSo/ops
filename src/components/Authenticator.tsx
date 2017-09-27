@@ -38,7 +38,11 @@ export const Authenticator = connect<S, DispatchProps, O>(
             .replace('_', '/')
         )
       )
-      this.props.actions.loggedIn({...userInfo, jwt})
+      this.props.actions.loggedIn({
+        teams: [],
+        ...userInfo,
+        jwt,
+      })
     }
   }
 )
