@@ -61,7 +61,7 @@ export const News = connect<S, DispatchProps, O>(
     private static highlightIn24Hours(row, cell) {
       const date   = News.extractDateFromId(row._id).getTime()
       if (Date.now() - date < HALF_DAY) {
-        return 'bg-warning'
+        return 'text-bold'
       }
     }
 
