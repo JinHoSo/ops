@@ -39,7 +39,6 @@ export const Authenticator = connect<S, DispatchProps, O>(
         )
       )
       this.props.actions.loggedIn({
-        teams: [],
         ...userInfo,
         jwt,
       })

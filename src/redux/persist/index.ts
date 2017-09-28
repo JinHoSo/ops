@@ -39,14 +39,17 @@ export function removeUserInfo() {
 export interface PersistState {
   userInfo: User
 }
-export interface User {
+export interface User extends BongsoClaim {
   jwt: string
-  tokens: Tokens
+}
+interface BongsoClaim {
+  provider: 'github'|'slack'|string
+  token: string
   name: string
-  email: string
-  avatarUrl: string
-  teams: string[]
+  permission: Permission
+  photo: string
+  email?: string
+  realName?: string
 }
-interface Tokens {
-  github: string
-}
+
+type Permission = 'normal' | 'admin' | 'owner' | string

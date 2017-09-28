@@ -13,7 +13,7 @@ interface Nav {
 }
 export const Nav: SFC<Nav> = props => {
   const {className, user} = props
-  const navs = user.teams.find(team => team === 'owners') ? ownersNavItems : navItems
+  const navs = user.permission !== 'normal' ? ownersNavItems : navItems
 
   return (
     <nav className={classnames(className, 'navbar', 'navbar-dark', 'bg-dark', 'align-items-center')}>

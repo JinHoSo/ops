@@ -35,9 +35,7 @@ export const News = connect<S, DispatchProps, O>(
             <Th width="160" dataField="_" dataAlign="center" dataFormat={this.formatId}>크롤링일자</Th>
             <Th width="160" dataField="작성일자" dataAlign="center">작성일자</Th>
             <Th dataField="제목" dataAlign="center" dataFormat={this.formatTitle}>제목</Th>
-            <Th width="80" dataField="조회수" dataAlign="center">조회수</Th>
             <Th width="160" dataField="접수일정" dataAlign="center">접수일정</Th>
-            <Th width="80" dataField="상태" dataAlign="center">상태</Th>
           </Table>
         </div>
       )
