@@ -42,7 +42,7 @@ export const UserBanner = connect<S, DispatchProps, O>(
             <span className="logout" onClick={this.props.actions.logout}>로그아웃</span>
           )}
           <img src={user.photo} role="presentation" width={32} height={32} />
-          <span>{user.name}({user.email})</span>
+          <span>{user.name}{user.email && `(${user.email})`}</span>
         </div>
       )
     }

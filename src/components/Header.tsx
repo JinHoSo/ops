@@ -9,6 +9,7 @@ import {actions, DispatchProps, RootState} from '../redux/index'
 import {User} from '../redux/persist/index'
 import {Nav} from './Nav'
 import {UserBanner} from './UserBanner'
+import {SITE_IMAGE} from '../constants/env'
 
 interface S {
   me: User
@@ -32,7 +33,7 @@ export const Header = connect<S, DispatchProps, O>(
           <div className="col-6">
             <Link href={ROUTES.HOME}>
               <a>
-                <img src="https://avatars2.githubusercontent.com/u/31210784?v=4&s=200" width={32} height={32}/>
+                <img src={SITE_IMAGE} width={32} height={32}/>
               </a>
             </Link>
           </div>
