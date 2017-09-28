@@ -30,7 +30,7 @@ export const LOGIN_SLACK_REQUEST_URL = [
   LOGIN_SLACK_REQUEST_URI,
   qs.stringify({
     client_id: SLACK_CLIENT_ID,
-    scope: ['team:read', 'usergroups:read', 'pins:read', 'stars:read', 'users:read'].join(',')
+    scope: ['team:read', 'usergroups:read', 'pins:read', 'stars:read'].join(',')
   })
 ].join('?')
 export const API_NEWS = `${API_URL}/news`

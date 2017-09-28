@@ -20,5 +20,4 @@ export const Home = props =>
         </a>
       </p>
     </div>
-
   </div>
