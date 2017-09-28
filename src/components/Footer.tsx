@@ -8,8 +8,12 @@ export const Footer = props =>
     <div className="col-12">
       © 2017 봉소랩스 Inc. All rights reserved.
       &nbsp;
-      <a href="https://github.com/bongso">
-        <img src="/static/img/github-xs.png" alt="bongso github"/>
+      <a target="_blank" href="https://github.com/bongso">
+        <img width={32} height={32} src="/static/img/github-icon.svg" alt="bongso github"/>
+      </a>
+      &nbsp;
+      <a target="_blank" href="https://deptno.slack.com/messages/C587B5X9T">
+        <img width={32} height={32} src="/static/img/slack.svg" alt="bongso github"/>
       </a>
     </div>
   </footer>
