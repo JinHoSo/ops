@@ -1,8 +1,8 @@
 import {bindActionCreators, combineReducers} from 'redux'
 import {PersistState, reducer as persist} from './persist/index'
 import {loggedIn, logout, reducer as system, SystemState} from './system/index'
-import {changeUrl, reducer as router, replaceUrl} from './router/index'
-import {getNews, reducer as news, NewsState} from './news/index'
+import {reducer as router, replaceUrl} from './router/index'
+import {bookmarkNews, getNews, NewsState, reducer as news, unBookmarkNews} from './news/index'
 
 export const reducer = combineReducers<RootState>({
   persist,
@@ -20,7 +20,11 @@ export function actions(dispatch): DispatchProps {
   const actionCreators = {
     loggedIn,
     logout,
+
     getNews,
+    bookmarkNews,
+    unBookmarkNews,
+
     replaceUrl
   }
   return {
@@ -31,6 +35,8 @@ interface ActionCreators {
   loggedIn: typeof loggedIn
   logout: typeof logout
   getNews: typeof getNews
+  bookmarkNews: typeof bookmarkNews
+  unBookmarkNews: typeof unBookmarkNews
   replaceUrl: typeof replaceUrl
 }
 export interface DispatchProps {

@@ -18,7 +18,9 @@ const LOGIN_GITHUB_REQUEST_URI = 'https://github.com/login/oauth/authorize'
 const SLACK_CLIENT_ID = '16709086454.247870125634'
 const LOGIN_SLACK_REQUEST_URI = 'https://slack.com/oauth/authorize'
 
-const API_URL = 'https://6w5av02ruc.execute-api.ap-northeast-2.amazonaws.com/dev'
+const API_URL = DEV
+  ? 'http://localhost:3000'
+  : 'https://6w5av02ruc.execute-api.ap-northeast-2.amazonaws.com/dev'
 export const LOGIN_GITHUB_REQUEST_URL = [
   LOGIN_GITHUB_REQUEST_URI,
   qs.stringify({

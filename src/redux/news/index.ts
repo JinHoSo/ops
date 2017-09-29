@@ -1,8 +1,7 @@
 import {Reducer} from 'redux'
-import {GET} from 'redux-fetch'
+import {DELETE, GET, POST} from 'redux-fetch'
 import {API_NEWS} from '../../constants/env'
 import {createActions, FAIL, headers, REQUEST, SUCCESS} from '../common'
-import {RootState} from '../index'
 
 const defaultState = {} as NewsState
 
@@ -26,6 +25,18 @@ export const reducer: Reducer<NewsState> = (state = defaultState, action) => {
         list: [],
         loading: false
       }
+    case ACTIONS_BOOKMARK_NEWS[SUCCESS]:
+      const index = state.list.findIndex(row => row._id === payload._id)
+      if (index === -1) {
+        return state
+      }
+      state.list.splice(index, 1, payload)
+      const list = state.list.slice()
+
+      return {
+        ...state,
+        list
+      }
     default:
       return state
   }
@@ -37,10 +48,18 @@ enum ActionTypes {
   LOGGED_IN = 'logged in',
   LOGOUT    = 'logout',
   NEWS      = 'news',
+  BOOKMARK_NEWS = 'bookmark news',
+  UN_BOOKMARK_NEWS = 'un bookmark news'
 }
 
 const ACTIONS_NEWS = createActions(ActionTypes.NEWS)
 export const getNews = () => GET(API_NEWS, ACTIONS_NEWS, {headers})
+
+const ACTIONS_BOOKMARK_NEWS = createActions(ActionTypes.BOOKMARK_NEWS)
+export const bookmarkNews = (id) => POST(`${API_NEWS}/${id}/bookmark`, ACTIONS_BOOKMARK_NEWS, {headers})
+
+const ACTIONS_UN_BOOKMARK_NEWS = createActions(ActionTypes.UN_BOOKMARK_NEWS)
+export const unBookmarkNews = (id) => DELETE(`${API_NEWS}/${id}/un-bookmark`, ACTIONS_UN_BOOKMARK_NEWS, {headers})
 
 export interface NewsState {
   list: News[]

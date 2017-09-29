@@ -3,7 +3,7 @@ import {createActions, FAIL, REQUEST, SUCCESS} from '../common'
 import {initializeGa} from '../log/index'
 import {removeUserInfo, saveUserInfo} from '../persist/index'
 import {Reducer} from 'redux'
-import {back, changeUrl} from '../router/index'
+import {changeUrl} from '../router/index'
 import {ROUTES} from '../../constants/routes'
 
 const defaultState = {} as SystemState
