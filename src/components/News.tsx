@@ -25,8 +25,10 @@ export const News = connect<S, DispatchProps, O>(
   class News extends React.Component<Props, {}> {
     static sm_hidden = 'hidden-sm-down'
     static defaultProps = {
-      list: []
+      list: [],
+      loading: true
     }
+
     render() {
       const {list, loading} = this.props
       
@@ -34,7 +36,7 @@ export const News = connect<S, DispatchProps, O>(
         <div>
           <Style>{stylesheet}</Style>
           {!loading && <h4>{list.length}</h4>}
-          <Table data={list} options={{noDataText: loading ? '로딩중...' : '데이터가 없습니다.'}} trClassName={News.highlightIn24Hours}>
+          <Table data={list} options={{noDataText: this.noText(loading)}} trClassName={News.highlightIn24Hours}>
             <Th width="80" dataField="번호" className={News.sm_hidden} columnClassName={News.sm_hidden} dataAlign="center" isKey>번호</Th>
             <Th width="100" dataField="name" dataAlign="center">소스</Th>
             <Th width="160" dataField="_" dataAlign="center" dataFormat={this.formatId}>크롤링일자</Th>
@@ -76,6 +78,17 @@ export const News = connect<S, DispatchProps, O>(
 
     private formatTitle(cell, row) {
       return <a href={row.url} target="_blank">{cell}</a>
+    }
+
+    private noText(loading) {
+      return loading
+        ? (
+          <p className="text-center">
+            <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+            <span className="sr-only">로딩중...</span>
+          </p>
+        )
+        : '데이터가 없습니다.'
     }
   }
 )
