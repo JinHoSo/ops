@@ -70,7 +70,7 @@ export const News = connect<S, DispatchProps, O>(
           </Table>
           {meta && (loading
               ? <Spinner size={3}/>
-              : <Next {...meta} next={page => this.props.actions.getNews({page})}/>
+              : list.length !== meta.totalCount && <Next {...meta} next={page => this.props.actions.getNews({page})}/>
           )}
         </div>
       )
