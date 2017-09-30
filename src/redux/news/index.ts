@@ -26,6 +26,7 @@ export const reducer: Reducer<NewsState> = (state = defaultState, action) => {
         loading: false
       }
     case ACTIONS_BOOKMARK_NEWS[SUCCESS]:
+    case ACTIONS_UN_BOOKMARK_NEWS[SUCCESS]:
       const index = state.list.findIndex(row => row._id === payload._id)
       if (index === -1) {
         return state
@@ -42,7 +43,7 @@ export const reducer: Reducer<NewsState> = (state = defaultState, action) => {
   }
 }
 
-enum ActionTypes {
+export enum ActionTypes {
   BOOT      = 'boot',
   SESSION   = 'session',
   LOGGED_IN = 'logged in',

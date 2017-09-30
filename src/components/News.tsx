@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {actions, DispatchProps, RootState} from '../redux/index'
-import {NewsState} from '../redux/news/index'
+import {bookmarkNews, NewsState} from '../redux/news/index'
 import {BootstrapTable as Table, TableHeaderColumn as Th} from 'react-bootstrap-table'
 import {SystemState} from '../redux/system/index'
 import {HALF_DAY} from '../constants/index'
@@ -9,14 +9,17 @@ import {Style} from './Style'
 import stylesheet from './News.pcss'
 import {PersistState} from '../redux/persist/index'
 import * as classnames from 'classnames'
+import {Spinner} from './Spinner'
 
 interface S extends NewsState, SystemState, PersistState {
 }
 
 interface O {
 }
-
 type Props = S & DispatchProps & O
+interface State {
+  bookmarking: Set<number>
+}
 export const News = connect<S, DispatchProps, O>(
   (state: RootState) => ({
     ...state.news,
@@ -25,11 +28,15 @@ export const News = connect<S, DispatchProps, O>(
   }),
   actions
 )(
-  class News extends React.Component<Props, {}> {
+  class News extends React.Component<Props, State> {
     static md_hidden = 'hidden-md-down'
     static defaultProps = {
       list: [],
       loading: true
+    }
+
+    state ={
+      bookmarking: new Set()
     }
 
     constructor(props) {
@@ -39,20 +46,20 @@ export const News = connect<S, DispatchProps, O>(
 
     render() {
       const {list, loading} = this.props
-      const hiddenCloumnProps = {className: News.md_hidden, columnClassName: News.md_hidden}
+      const hiddenColumnProps = {className: News.md_hidden, columnClassName: News.md_hidden}
 
       return (
         <div>
           <Style>{stylesheet}</Style>
           {!loading && <h4>{list.length}</h4>}
           <Table data={list} options={{noDataText: this.noText(loading)}} trClassName={News.highlightIn24Hours}>
-            <Th width="80" dataField="번호" dataAlign="center" isKey {...hiddenCloumnProps} >번호</Th>
+            <Th width="80" dataField="번호" dataAlign="center" isKey {...hiddenColumnProps} >번호</Th>
             <Th width="110" dataField="name" dataAlign="center">소스</Th>
             <Th width="110" dataField="_" dataAlign="center" dataFormat={this.formatId}>크롤링일자</Th>
-            <Th width="110" dataField="작성일자" dataAlign="center" {...hiddenCloumnProps}>작성일자</Th>
+            <Th width="110" dataField="작성일자" dataAlign="center" {...hiddenColumnProps}>작성일자</Th>
             <Th dataField="제목" dataAlign="center" dataFormat={this.formatTitle}>제목</Th>
-            <Th width="110" dataField="접수일정" dataAlign="center" {...hiddenCloumnProps}>접수일정</Th>
-            <Th width="70" dataField="bookmarkers" dataAlign="center" {...hiddenCloumnProps} dataFormat={this.formatBookmarkers}>
+            <Th width="110" dataField="접수일정" dataAlign="center" {...hiddenColumnProps}>접수일정</Th>
+            <Th width="70" dataField="bookmarkers" dataAlign="center" {...hiddenColumnProps} dataFormat={this.formatBookmarkers}>
               <i className={'fa fa-users fa-lg'} />
             </Th>
             <Th width="60" dataField="_" dataAlign="center" dataFormat={this.formatBookmark}>
@@ -124,25 +131,34 @@ export const News = connect<S, DispatchProps, O>(
     private formatBookmark(cell, {_id, bookmarkers = []}) {
       const bookmarker = Boolean(bookmarkers.find(bookmarker => bookmarker.name === this.props.userInfo.name))
 
+      if (this.state.bookmarking.has(_id)) {
+        return <Spinner size={'lg'} />
+      }
       return (
         <i
           className={classnames('fa fa-lg', {'fa-heart-o': !bookmarker, 'fa-heart': bookmarker})}
           onClick={bookmarker
-            ? this.props.actions.unBookmarkNews.bind(null, _id)
-            : this.props.actions.bookmarkNews.bind(null, _id)
+            ? () => this.bookmarking(this.props.actions.unBookmarkNews, _id)
+            : () => this.bookmarking(this.props.actions.bookmarkNews, _id)
           }
         />
       )
     }
 
+    private async bookmarking(action: typeof bookmarkNews, id) {
+      this.state.bookmarking.add(id)
+      this.setState({bookmarking: new Set(this.state.bookmarking)})
+
+      await action(id)
+
+      this.state.bookmarking.delete(id)
+      this.setState({bookmarking: new Set(this.state.bookmarking)})
+    }
+
+
     private noText(loading) {
       return loading
-        ? (
-          <p className="text-center">
-            <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-            <span className="sr-only">로딩중...</span>
-          </p>
-        )
+        ? <Spinner size={3} />
         : '데이터가 없습니다.'
     }
   }

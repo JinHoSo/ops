@@ -8,7 +8,7 @@ export const reducer = combineReducers<RootState>({
   persist,
   system,
   router,
-  news
+  news,
 })
 export interface RootState {
   persist: PersistState
