@@ -118,8 +118,8 @@ export const News = connect<S, DispatchProps, O>(
     private formatBookmarkers(cell, {_id, bookmarkers = []}) {
       const placeholder = 'https://cad.onshape.com/images/placeholder-user.png'
       const people      = bookmarkers
+        .slice(-3)
         .reverse()
-        .slice(0, 3)
       const imageProps  = {
         width:     32,
         height:    32,
@@ -128,7 +128,7 @@ export const News = connect<S, DispatchProps, O>(
 
       return (
         <div title={`${bookmarkers.length} 명이 좋아합니다.`}>
-          {people.map(person => <img src={person.photo || placeholder} alt={person.name} {...imageProps} />)}
+          {people.map(person => <img key={person.name} src={person.photo || placeholder} alt={person.name} {...imageProps} />)}
           {bookmarkers.length > 3 && <img src={placeholder} alt=""  {...imageProps} />}
         </div>
       )
