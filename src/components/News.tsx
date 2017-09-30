@@ -107,11 +107,16 @@ export const News = connect<S, DispatchProps, O>(
       const people = bookmarkers
         .reverse()
         .slice(0, 3)
+      const imageProps = {
+        width: 32,
+        height: 32,
+        className: 'like-user-photo'
+      }
 
       return (
         <div title={`${bookmarkers.length} 명이 좋아합니다.`}>
-          {people.map(person => <img src={person.photo||placeholder} alt={person.name} width={32} height={32}/>)}
-          {bookmarkers.length > 3 && <img src={placeholder} alt="" width={32}/>}
+          {people.map(person => <img src={person.photo||placeholder} alt={person.name} {...imageProps} />)}
+          {bookmarkers.length > 3 && <img src={placeholder} alt=""  {...imageProps} />}
         </div>
       )
     }
